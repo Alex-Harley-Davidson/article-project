@@ -31,6 +31,8 @@ services:
       - MYSQL_PASSWORD=12345
     volumes:
       - ./data_files/mysql:/var/lib/mysql
+    ports:
+      - 3309:3306
 
   #pgsql:
   #  image: postgres:9.5
