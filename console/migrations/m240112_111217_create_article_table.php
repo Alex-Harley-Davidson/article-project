@@ -14,7 +14,22 @@ class m240112_111217_create_article_table extends Migration
     {
         $this->createTable('{{%article}}', [
             'id' => $this->primaryKey(),
+            'title' => $this->string()->notNull(),
+            'anons' => $this->text(),
+            'text' => $this->text(),
+            'img' => $this->string(),
+            'author_id' => $this->integer()->notNull(),
         ]);
+
+        $this->addForeignKey(
+            'fk-article-author_id',
+            '{{%article}}',
+            'author_id',
+            'author',
+            'id',
+            'CASCADE',
+            'CASCADE'
+        );
     }
 
     /**
@@ -22,6 +37,10 @@ class m240112_111217_create_article_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey(
+            'fk-article-author_id',
+            '{{%article}}');
+
         $this->dropTable('{{%article}}');
     }
 }
