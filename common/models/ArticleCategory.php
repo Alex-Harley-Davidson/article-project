@@ -30,7 +30,7 @@ class ArticleCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'name'], 'required'],
+            [['name'], 'required'],
             [['parent_id'], 'integer'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
