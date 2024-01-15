@@ -2,7 +2,8 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "article_category_relation".
@@ -14,20 +15,20 @@ use Yii;
  * @property Article $article
  * @property ArticleCategory $category
  */
-class ArticleCategoryRelation extends \yii\db\ActiveRecord
+class ArticleCategoryRelation extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'article_category_relation';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['article_id', 'category_id'], 'integer'],
@@ -37,9 +38,9 @@ class ArticleCategoryRelation extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -51,9 +52,9 @@ class ArticleCategoryRelation extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Article]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getArticle()
+    public function getArticle(): ActiveQuery
     {
         return $this->hasOne(Article::class, ['id' => 'article_id']);
     }
@@ -61,9 +62,9 @@ class ArticleCategoryRelation extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Category]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getCategory()
+    public function getCategory(): ActiveQuery
     {
         return $this->hasOne(ArticleCategory::class, ['id' => 'category_id']);
     }

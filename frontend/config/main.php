@@ -36,14 +36,32 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'article'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'author'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'article-category'],
+                'GET search/article-by-title/<title>' => 'search/article-by-title',
+                'GET search/article-by-author/<authorId>' => 'search/article-by-author',
+                'GET search/article-by-category/<categoryId>' => 'search/article-by-category',
             ],
         ],
-        */
+
+        'response' => [
+            // ...
+            'formatters' => [
+                \yii\web\Response::FORMAT_JSON => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                    'prettyPrint' => YII_DEBUG, // используем "pretty" в режиме отладки
+                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+                    // ...
+                ],
+            ],
+        ],
+
     ],
     'params' => $params,
 ];

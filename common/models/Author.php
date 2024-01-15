@@ -2,7 +2,8 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "author".
@@ -12,20 +13,20 @@ use Yii;
  * @property int|null $year
  * @property string|null $biography
  */
-class Author extends \yii\db\ActiveRecord
+class Author extends ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'author';
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['name'], 'required'],
@@ -36,9 +37,9 @@ class Author extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @return array
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -46,5 +47,13 @@ class Author extends \yii\db\ActiveRecord
             'year' => 'Year',
             'biography' => 'Biography',
         ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getArticles(): ActiveQuery
+    {
+        return $this->hasMany(Article::class, ["author_id" => "id"]);
     }
 }
