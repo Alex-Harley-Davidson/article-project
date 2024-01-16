@@ -56,6 +56,18 @@ docker-compose run --rm backend php yii data/generate
 GET http://localhost:20080/articles
 ```
 
+Получение списка статей с сортировкой, необходимо указать get-параметр `sort` со значением поля,
+по которому нужно сортировать. Например, сортировка по полю `title`:
+
+```
+GET http://localhost:20080/articles?sort=title
+```
+
+Для сортировки по полю `title` в обратном порядке:
+```
+GET http://localhost:20080/articles?sort=-title
+```
+
 Получение одной статьи, где `<id>` идентификатор статьи:
 
 ```
